@@ -23,6 +23,24 @@ on post-fs-data
 on boot
     start mtk.plpath.utils.link
 
+    # Vibrator/Haptics
+    chmod 0660 /sys/class/leds/vibrator/activate
+    chmod 0660 /sys/class/leds/vibrator/duration
+    chmod 0660 /sys/class/leds/vibrator/state
+    chmod 0660 /sys/class/leds/vibrator/brightness
+    chown system system /sys/class/leds/vibrator/activate
+    chown system system /sys/class/leds/vibrator/duration
+    chown system system /sys/class/leds/vibrator/state
+    chown system system /sys/class/leds/vibrator/brightness
+
+    # USB OTG (best-effort role/vbus hints for host mode when supported)
+    write /sys/devices/platform/odm/odm:tran_battery/OTG_CTL 1
+    write /sys/module/musb_hdrc/parameters/vbus_on Y
+    chown system system /sys/class/usb_role/mt_usb-role-switch/role
+    chmod 0664 /sys/class/usb_role/mt_usb-role-switch/role
+    chown system system /sys/class/typec/port0/preferred_role
+    chmod 0664 /sys/class/typec/port0/preferred_role
+
 on property:persist.vendor.mtk.pl_lnk=1
     symlink /dev/block/mapper/pl_a /dev/block/by-name/preloader_raw_a
     symlink /dev/block/mapper/pl_b /dev/block/by-name/preloader_raw_b

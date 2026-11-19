@@ -170,5 +170,11 @@ TW_MAX_BRIGHTNESS := 4095
 TARGET_INIT_VENDOR_LIB := libinit_Infinix-X6853
 TARGET_RECOVERY_DEVICE_MODULES := libinit_Infinix-X6853
 
+# USB OTG
+TW_USE_USB_STORAGE := true
+
+# Haptics
+TW_SUPPORT_INPUT_AIDL_HAPTICS := false
+
 # Maintainer (optional)
 TW_MAINTAINER := Opek
